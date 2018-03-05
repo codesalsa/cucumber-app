@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { OneSignal } from '@ionic-native/onesignal';
 
 import { CustomHeaderComponent } from '../components/custom-header/custom-header';
+import { MinicartComponent } from '../components/minicart/minicart';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -37,7 +38,8 @@ import { WoocommerceProvider } from '../providers/woocommerce/woocommerce';
     CheckoutPage,
     SearchPage,
     OrdersPage,
-    CustomHeaderComponent
+    CustomHeaderComponent,
+    MinicartComponent
   ],
   imports: [
     BrowserModule,

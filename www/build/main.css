@@ -27981,6 +27981,11 @@ ion-title {
   margin-right: 10px !important;
 }
 
+minicart .flaticon:before {
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+}
+
 page-cart .col-wrapper {
   padding: 10px;
   background: #fff;
