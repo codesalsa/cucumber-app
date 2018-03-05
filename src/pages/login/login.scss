@@ -1,0 +1,13 @@
+page-login {
+    .transparent-navbar .toolbar-background{
+        background: none !important;
+        border: 0 !important;
+    }
+    .scroll-content{margin-top:0 !important;}
+    .login-cont-bg{
+        position: absolute;
+        top: 0;
+        height: 150%;
+        left: 0;
+    }
+}

@@ -1,0 +1,45 @@
+page-product-details {
+    .single-price-col{
+        text-align: center;
+    }
+    .single-price-col ins{
+        font-size: 1.5em;
+        float: left;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 900;
+        color: #444;
+    }
+    ion-footer{
+        border-top:1px solid #e4e4e4;
+    }
+    .single-prod-cats{
+        border-radius: 0;
+        line-height: 16px;
+        height: auto;
+        padding: 5px 0;
+        margin:0 5px 0 0;
+    }
+    .single-prod-action{
+        height:46px;
+    }
+    .prod-single-title span{
+        font-size: 1.7rem;
+        line-height: 21px !important;
+        float: left;
+        width: 100%;
+        margin: 0 0 15px;
+    }
+    ion-card{box-shadow:none !important;}
+    .footer-card-content{
+        padding:0px 16px;
+    }
+    .specification-title{
+        font-size: 15px;
+        background: #ccc;
+        float: left;
+        padding: 5px 10px;
+        color: #444;
+        margin: 0 0 10px;
+    }
+}

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="danger" class="transparent-navbar">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Account Login</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only color="light" (click)="onSearch()">
+          <span class="flaticon flaticon-magnifying-glass"></span>
+        </button>
+        <button ion-button icon-only color="light" (click)="openCart()">
+            <span class="flaticon flaticon-commerce-2"></span>
+          </button>
+      </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <img src="../assets/imgs/account_bg.jpg" class="login-cont-bg" />
+  <ion-card style="margin: 0px; border: none; width: 100%;">
+    <img src="./assets/imgs/mb_logo_small.png" style="width:70%; margin: auto; padding:20px;" />
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block color="danger" (click)="login()">Login</button>
+  <button ion-button clear block color="danger">No Account? Sign Up Here</button>
+
+</ion-content>

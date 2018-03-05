@@ -1,0 +1,97 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <div id="user-profile-cont" *ngIf="loggedIn">
+        <img src="../assets/imgs/account_bg.jpg" class="profile-details-cont-bg" />
+      <div class="profile-details-cont">
+        
+        <div class="profile-pic">
+          <img src="{{ (this.user.avatar) }}" class="profile-img" />
+        </div>
+        <h2>{{ (this.user.firstname) }} {{ (this.user.lastname) }}</h2>
+        <h3 class="email">{{  (this.user.email)  }}</h3>
+      </div>
+    </div>
+
+    <div id="user-profile-cont" *ngIf="!loggedIn" class="not-loggedin">
+        <img src="../assets/imgs/account_bg.jpg" class="profile-details-cont-bg" />
+      <div class="profile-details-cont">
+        
+        <div class="profile-pic">
+          <img src="../assets/imgs/easynow_logo_small.png" class="profile-img" />
+        </div>
+      </div>
+    </div>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item menuClose (click) = "openPage('home')">
+          <span class="flaticon flaticon-building" item-left></span>
+          <h2>Home</h2>
+          <p>Easynow Home</p>
+      </ion-item>
+      <ion-item-divider color="danger">Categories</ion-item-divider>
+      
+      <ion-card *ngFor="let category of categories; let i = index" class="menu-cat-items">
+        <ion-item color="light" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}" *ngIf="category.count > 1">
+          <span class="flaticon {{category.description}}" item-left></span>
+          <h2 [innerHTML]="category.name"></h2>
+          <span class="flaticon flaticon-right-chevron flaticon-rightarrow" item-right></span>
+      </ion-item>
+
+        <!-- Optional Subcategories Display -->
+        <ion-list no-lines *ngIf="isGroupShown(i)"  class="menu-subcat-items">
+          <ion-item *ngFor="let sub of category.subCategories" text-wrap (click)="openCategoryPage(sub)" menuClose>
+            <span class="flaticon {{sub.description}}" item-left></span>
+            <h2 [innerHTML]="sub.name"></h2>
+            <!-- <p> {{ sub.description }}</p> -->
+
+          </ion-item>
+        </ion-list>
+      </ion-card>
+
+      <ion-item-divider color="danger">Account</ion-item-divider>
+
+      <ion-item (click)="openPage('signup')" menuClose *ngIf="!loggedIn">
+        <span class="flaticon flaticon-profile" item-left></span>
+        <h2>Sign Up</h2>
+        <p>For a new account</p>
+      </ion-item>
+
+      <ion-item (click)="openPage('login')" menuClose *ngIf="!loggedIn">
+        <span class="flaticon flaticon-logout" item-left></span>
+        <h2>Login</h2>
+        <p>Using email and password</p>
+      </ion-item>
+
+      <ion-item menuClose *ngIf="loggedIn" (click) = "openPage('cart')">
+          <span class="flaticon flaticon-shopping-cart" item-left></span>
+        <h2>Your Cart</h2>
+        <p>Check Items in your Cart</p>
+      </ion-item>
+
+      <ion-item menuClose *ngIf="loggedIn" (click) = "openPage('orders')">
+          <span class="flaticon flaticon-list" item-left></span>
+        <h2>My Orders</h2>
+        <p>Check your recent Orders</p>
+      </ion-item>
+
+      <ion-item menuClose *ngIf="loggedIn" (click) = "openPage('orders')">
+          <span class="flaticon flaticon-like" item-left></span>
+        <h2>My Wishlist</h2>
+        <p>Check your Wishlist</p>
+      </ion-item>
+
+      <ion-item menuClose *ngIf="loggedIn" (click) = "openPage('logout')">
+        <span class="flaticon flaticon-logout" item-left></span>
+        <h2>Logout</h2>
+        <p>of your Account</p>
+      </ion-item>
+
+    </ion-list>
+  </ion-content> 
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="homePage" #content></ion-nav>

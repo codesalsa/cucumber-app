@@ -1,0 +1,14 @@
+<ion-navbar color="danger">
+  <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>{{ title }}</ion-title>
+  <ion-buttons end>
+    <button ion-button icon-only color="light" (click)="onSearch()">
+      <span class="flaticon flaticon-magnifying-glass"></span>
+    </button>
+    <button ion-button icon-only color="light" (click)="openCart()">
+        <span class="flaticon flaticon-online-shopping-cart"></span>
+      </button>
+  </ion-buttons>
+</ion-navbar>

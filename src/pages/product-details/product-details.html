@@ -1,0 +1,61 @@
+<ion-header>
+    <custom-header title="{{product.title}}"></custom-header>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-slides pager>
+      <ion-slide *ngFor="let image of product.images">
+        <img [src]="image.src" />
+      </ion-slide>
+    </ion-slides>
+    <ion-card-content>
+      <ion-card-title class="prod-single-title">
+        <span [innerHTML]="product.title"></span><br />
+        <ion-chip *ngFor="let cat of product.categories" color="dark" class="single-prod-cats">
+          <ion-label color="light">
+            {{cat}}
+          </ion-label>
+        </ion-chip>
+      </ion-card-title>
+      <p [innerHTML]="product.description"></p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="product.attributes.length > 0">
+    <ion-card-content>
+      <ion-card-title class="specification-title">Specifications</ion-card-title>
+      <ion-grid>
+        <ion-row *ngFor="let attr of product.attributes">
+          <ion-col col-4><strong>{{attr.name}}</strong></ion-col>
+          <ion-col col-8>
+            <span *ngFor="let option of attr.options">
+              {{option}}
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-card>
+      <ion-card-content class="footer-card-content">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-4 class="single-price-col">
+                      <p [innerHTML]="product.price_html"></p>
+                  </ion-col>
+                  <ion-col col-8>
+                      <button ion-button icon-left block color="danger" (click)="addToCart(product)" class="single-prod-action">
+                        <ion-icon name="basket"></ion-icon> Add to Cart
+                      </button>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-card-content>
+    </ion-card>
+</ion-footer>

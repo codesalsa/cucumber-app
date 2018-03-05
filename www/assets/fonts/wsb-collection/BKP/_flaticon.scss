@@ -1,0 +1,205 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 13/02/2018 18:43
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-right-chevron:before { content: "\f100"; }
+.flaticon-arrow-chevron:before { content: "\f101"; }
+.flaticon-down-arrow:before { content: "\f102"; }
+.flaticon-shirt-with-vest:before { content: "\f103"; }
+.flaticon-sport-shoe:before { content: "\f104"; }
+.flaticon-short-pants:before { content: "\f105"; }
+.flaticon-women-top:before { content: "\f106"; }
+.flaticon-men-short-pants:before { content: "\f107"; }
+.flaticon-shorts-with-belt:before { content: "\f108"; }
+.flaticon-women-pants:before { content: "\f109"; }
+.flaticon-cocktail-dress:before { content: "\f10a"; }
+.flaticon-leather-chelsea-boots:before { content: "\f10b"; }
+.flaticon-shorts-with-two-pockets:before { content: "\f10c"; }
+.flaticon-chino-shorts:before { content: "\f10d"; }
+.flaticon-oxford-wave-blazer:before { content: "\f10e"; }
+.flaticon-formal-shirt:before { content: "\f10f"; }
+.flaticon-nylon-jacket:before { content: "\f110"; }
+.flaticon-women:before { content: "\f111"; }
+.flaticon-rupee-4:before { content: "\f112"; }
+.flaticon-handbag:before { content: "\f113"; }
+.flaticon-skinny-jeans:before { content: "\f114"; }
+.flaticon-women-coat-1:before { content: "\f115"; }
+.flaticon-trench-coat:before { content: "\f116"; }
+.flaticon-trousers-1:before { content: "\f117"; }
+.flaticon-kitchen-mixer:before { content: "\f118"; }
+.flaticon-cross-out:before { content: "\f119"; }
+.flaticon-studded-heels:before { content: "\f11a"; }
+.flaticon-platform-heels:before { content: "\f11b"; }
+.flaticon-rupee-indian:before { content: "\f11c"; }
+.flaticon-polo-shirt-for-women:before { content: "\f11d"; }
+.flaticon-female-black-dress:before { content: "\f11e"; }
+.flaticon-skirt-black-short-shape:before { content: "\f11f"; }
+.flaticon-blender-machine:before { content: "\f120"; }
+.flaticon-black-jacket:before { content: "\f121"; }
+.flaticon-long-pants:before { content: "\f122"; }
+.flaticon-search-magnifier-interface-symbol:before { content: "\f123"; }
+.flaticon-building:before { content: "\f124"; }
+.flaticon-indian-rupee:before { content: "\f125"; }
+.flaticon-bag:before { content: "\f126"; }
+.flaticon-valentines-heart:before { content: "\f127"; }
+.flaticon-commerce-2:before { content: "\f128"; }
+.flaticon-magnifying-glass-browser:before { content: "\f129"; }
+.flaticon-trail-running-shoe:before { content: "\f12a"; }
+.flaticon-body:before { content: "\f12b"; }
+.flaticon-jacket-4:before { content: "\f12c"; }
+.flaticon-polo:before { content: "\f12d"; }
+.flaticon-rupee-3:before { content: "\f12e"; }
+.flaticon-rupee-2:before { content: "\f12f"; }
+.flaticon-jeans:before { content: "\f130"; }
+.flaticon-body-2:before { content: "\f131"; }
+.flaticon-t-shirt:before { content: "\f132"; }
+.flaticon-trousers:before { content: "\f133"; }
+.flaticon-jacket-3:before { content: "\f134"; }
+.flaticon-wishlist:before { content: "\f135"; }
+.flaticon-indian:before { content: "\f136"; }
+.flaticon-man:before { content: "\f137"; }
+.flaticon-shopping-list:before { content: "\f138"; }
+.flaticon-rupee-1:before { content: "\f139"; }
+.flaticon-polo-shirt-1:before { content: "\f13a"; }
+.flaticon-technology:before { content: "\f13b"; }
+.flaticon-polo-shirt:before { content: "\f13c"; }
+.flaticon-baby-dress:before { content: "\f13d"; }
+.flaticon-jacket-1:before { content: "\f13e"; }
+.flaticon-jacket:before { content: "\f13f"; }
+.flaticon-women-coat:before { content: "\f140"; }
+.flaticon-women-long-coat:before { content: "\f141"; }
+.flaticon-commerce-1:before { content: "\f142"; }
+.flaticon-heart-1:before { content: "\f143"; }
+.flaticon-skirt:before { content: "\f144"; }
+.flaticon-favorite:before { content: "\f145"; }
+.flaticon-heart:before { content: "\f146"; }
+.flaticon-woman:before { content: "\f147"; }
+.flaticon-shopping-cart-1:before { content: "\f148"; }
+.flaticon-rupee:before { content: "\f149"; }
+.flaticon-commerce:before { content: "\f14a"; }
+.flaticon-like:before { content: "\f14b"; }
+.flaticon-shopping-cart:before { content: "\f14c"; }
+.flaticon-hat-2:before { content: "\f14d"; }
+.flaticon-hat-1:before { content: "\f14e"; }
+.flaticon-hat:before { content: "\f14f"; }
+.flaticon-body-1:before { content: "\f150"; }
+.flaticon-magnifying-glass:before { content: "\f151"; }
+.flaticon-dress:before { content: "\f152"; }
+    
+    $font-Flaticon-right-chevron: "\f100";
+    $font-Flaticon-arrow-chevron: "\f101";
+    $font-Flaticon-down-arrow: "\f102";
+    $font-Flaticon-shirt-with-vest: "\f103";
+    $font-Flaticon-sport-shoe: "\f104";
+    $font-Flaticon-short-pants: "\f105";
+    $font-Flaticon-women-top: "\f106";
+    $font-Flaticon-men-short-pants: "\f107";
+    $font-Flaticon-shorts-with-belt: "\f108";
+    $font-Flaticon-women-pants: "\f109";
+    $font-Flaticon-cocktail-dress: "\f10a";
+    $font-Flaticon-leather-chelsea-boots: "\f10b";
+    $font-Flaticon-shorts-with-two-pockets: "\f10c";
+    $font-Flaticon-chino-shorts: "\f10d";
+    $font-Flaticon-oxford-wave-blazer: "\f10e";
+    $font-Flaticon-formal-shirt: "\f10f";
+    $font-Flaticon-nylon-jacket: "\f110";
+    $font-Flaticon-women: "\f111";
+    $font-Flaticon-rupee-4: "\f112";
+    $font-Flaticon-handbag: "\f113";
+    $font-Flaticon-skinny-jeans: "\f114";
+    $font-Flaticon-women-coat-1: "\f115";
+    $font-Flaticon-trench-coat: "\f116";
+    $font-Flaticon-trousers-1: "\f117";
+    $font-Flaticon-kitchen-mixer: "\f118";
+    $font-Flaticon-cross-out: "\f119";
+    $font-Flaticon-studded-heels: "\f11a";
+    $font-Flaticon-platform-heels: "\f11b";
+    $font-Flaticon-rupee-indian: "\f11c";
+    $font-Flaticon-polo-shirt-for-women: "\f11d";
+    $font-Flaticon-female-black-dress: "\f11e";
+    $font-Flaticon-skirt-black-short-shape: "\f11f";
+    $font-Flaticon-blender-machine: "\f120";
+    $font-Flaticon-black-jacket: "\f121";
+    $font-Flaticon-long-pants: "\f122";
+    $font-Flaticon-search-magnifier-interface-symbol: "\f123";
+    $font-Flaticon-building: "\f124";
+    $font-Flaticon-indian-rupee: "\f125";
+    $font-Flaticon-bag: "\f126";
+    $font-Flaticon-valentines-heart: "\f127";
+    $font-Flaticon-commerce-2: "\f128";
+    $font-Flaticon-magnifying-glass-browser: "\f129";
+    $font-Flaticon-trail-running-shoe: "\f12a";
+    $font-Flaticon-body: "\f12b";
+    $font-Flaticon-jacket-4: "\f12c";
+    $font-Flaticon-polo: "\f12d";
+    $font-Flaticon-rupee-3: "\f12e";
+    $font-Flaticon-rupee-2: "\f12f";
+    $font-Flaticon-jeans: "\f130";
+    $font-Flaticon-body-2: "\f131";
+    $font-Flaticon-t-shirt: "\f132";
+    $font-Flaticon-trousers: "\f133";
+    $font-Flaticon-jacket-3: "\f134";
+    $font-Flaticon-wishlist: "\f135";
+    $font-Flaticon-indian: "\f136";
+    $font-Flaticon-man: "\f137";
+    $font-Flaticon-shopping-list: "\f138";
+    $font-Flaticon-rupee-1: "\f139";
+    $font-Flaticon-polo-shirt-1: "\f13a";
+    $font-Flaticon-technology: "\f13b";
+    $font-Flaticon-polo-shirt: "\f13c";
+    $font-Flaticon-baby-dress: "\f13d";
+    $font-Flaticon-jacket-1: "\f13e";
+    $font-Flaticon-jacket: "\f13f";
+    $font-Flaticon-women-coat: "\f140";
+    $font-Flaticon-women-long-coat: "\f141";
+    $font-Flaticon-commerce-1: "\f142";
+    $font-Flaticon-heart-1: "\f143";
+    $font-Flaticon-skirt: "\f144";
+    $font-Flaticon-favorite: "\f145";
+    $font-Flaticon-heart: "\f146";
+    $font-Flaticon-woman: "\f147";
+    $font-Flaticon-shopping-cart-1: "\f148";
+    $font-Flaticon-rupee: "\f149";
+    $font-Flaticon-commerce: "\f14a";
+    $font-Flaticon-like: "\f14b";
+    $font-Flaticon-shopping-cart: "\f14c";
+    $font-Flaticon-hat-2: "\f14d";
+    $font-Flaticon-hat-1: "\f14e";
+    $font-Flaticon-hat: "\f14f";
+    $font-Flaticon-body-1: "\f150";
+    $font-Flaticon-magnifying-glass: "\f151";
+    $font-Flaticon-dress: "\f152";

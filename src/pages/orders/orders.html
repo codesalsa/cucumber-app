@@ -1,0 +1,32 @@
+<ion-header>
+  <custom-header title="My Orders"></custom-header>
+</ion-header>
+
+
+<ion-content>
+  <ion-list class="accordion-list">
+    <!-- First Level -->
+    <ion-list-header *ngFor="let item of orders; let i = index" no-lines no-padding>
+      <!-- Toggle Button -->
+      <button ion-item (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
+        <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
+          Order No. #{{ item.id }}
+      </button>
+
+
+ 
+      <ion-list no-lines *ngIf="isGroupShown(i)">
+        <!-- Second Level -->
+        <ion-list-header *ngFor="let child of item.line_items" no-padding>
+          <!-- Toggle Button -->
+          <button ion-item class="child">
+            {{ child.id }}
+          </button>
+ 
+        </ion-list-header>
+      </ion-list>
+       
+    </ion-list-header>
+  </ion-list>
+</ion-content>

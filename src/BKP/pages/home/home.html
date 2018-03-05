@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-slides autoplay="3000" pager>
+      <ion-slide>
+        <img src="http://placehold.it/360x240" />
+      </ion-slide>
+      <ion-slide>
+          <img src="http://placehold.it/360x240" />
+      </ion-slide>
+      <ion-slide>
+        <img src="http://placehold.it/360x240" />
+      </ion-slide>
+      <ion-slide>
+        <img src="http://placehold.it/360x240" />
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+  <ion-row>
+      <ion-col col-6 *ngFor="let product of moreproducts" text-wrap>
+        <ion-thumbnail item-left>
+            <img [src]="product.featured_src" />
+          </ion-thumbnail>
+          <h2 [innerHTML]="product.title.substr(0, 50) + '...'"></h2>
+          <p>
+            <span [innerHTML]="product.price_html"></span>
+          </p>
+      </ion-col>
+  </ion-row>
+</ion-content>

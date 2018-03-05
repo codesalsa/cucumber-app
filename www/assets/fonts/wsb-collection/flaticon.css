@@ -1,0 +1,115 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 13/02/2018 23:24
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-logout:before { content: "\f100"; }
+.flaticon-right-chevron:before { content: "\f101"; }
+.flaticon-arrow-chevron:before { content: "\f102"; }
+.flaticon-down-arrow:before { content: "\f103"; }
+.flaticon-shirt-with-vest:before { content: "\f104"; }
+.flaticon-sport-shoe:before { content: "\f105"; }
+.flaticon-short-pants:before { content: "\f106"; }
+.flaticon-women-top:before { content: "\f107"; }
+.flaticon-men-short-pants:before { content: "\f108"; }
+.flaticon-shorts-with-belt:before { content: "\f109"; }
+.flaticon-women-pants:before { content: "\f10a"; }
+.flaticon-cocktail-dress:before { content: "\f10b"; }
+.flaticon-leather-chelsea-boots:before { content: "\f10c"; }
+.flaticon-shorts-with-two-pockets:before { content: "\f10d"; }
+.flaticon-chino-shorts:before { content: "\f10e"; }
+.flaticon-oxford-wave-blazer:before { content: "\f10f"; }
+.flaticon-formal-shirt:before { content: "\f110"; }
+.flaticon-nylon-jacket:before { content: "\f111"; }
+.flaticon-women:before { content: "\f112"; }
+.flaticon-rupee-4:before { content: "\f113"; }
+.flaticon-handbag:before { content: "\f114"; }
+.flaticon-skinny-jeans:before { content: "\f115"; }
+.flaticon-women-coat-1:before { content: "\f116"; }
+.flaticon-trench-coat:before { content: "\f117"; }
+.flaticon-trousers-1:before { content: "\f118"; }
+.flaticon-kitchen-mixer:before { content: "\f119"; }
+.flaticon-cross-out:before { content: "\f11a"; }
+.flaticon-studded-heels:before { content: "\f11b"; }
+.flaticon-platform-heels:before { content: "\f11c"; }
+.flaticon-rupee-indian:before { content: "\f11d"; }
+.flaticon-polo-shirt-for-women:before { content: "\f11e"; }
+.flaticon-female-black-dress:before { content: "\f11f"; }
+.flaticon-skirt-black-short-shape:before { content: "\f120"; }
+.flaticon-blender-machine:before { content: "\f121"; }
+.flaticon-black-jacket:before { content: "\f122"; }
+.flaticon-long-pants:before { content: "\f123"; }
+.flaticon-search-magnifier-interface-symbol:before { content: "\f124"; }
+.flaticon-building:before { content: "\f125"; }
+.flaticon-indian-rupee:before { content: "\f126"; }
+.flaticon-bag:before { content: "\f127"; }
+.flaticon-valentines-heart:before { content: "\f128"; }
+.flaticon-commerce-2:before { content: "\f129"; }
+.flaticon-magnifying-glass-browser:before { content: "\f12a"; }
+.flaticon-trail-running-shoe:before { content: "\f12b"; }
+.flaticon-body:before { content: "\f12c"; }
+.flaticon-jacket-4:before { content: "\f12d"; }
+.flaticon-polo:before { content: "\f12e"; }
+.flaticon-rupee-3:before { content: "\f12f"; }
+.flaticon-rupee-2:before { content: "\f130"; }
+.flaticon-jeans:before { content: "\f131"; }
+.flaticon-body-2:before { content: "\f132"; }
+.flaticon-t-shirt:before { content: "\f133"; }
+.flaticon-trousers:before { content: "\f134"; }
+.flaticon-jacket-3:before { content: "\f135"; }
+.flaticon-wishlist:before { content: "\f136"; }
+.flaticon-indian:before { content: "\f137"; }
+.flaticon-man:before { content: "\f138"; }
+.flaticon-shopping-list:before { content: "\f139"; }
+.flaticon-rupee-1:before { content: "\f13a"; }
+.flaticon-polo-shirt-1:before { content: "\f13b"; }
+.flaticon-technology:before { content: "\f13c"; }
+.flaticon-polo-shirt:before { content: "\f13d"; }
+.flaticon-baby-dress:before { content: "\f13e"; }
+.flaticon-jacket-1:before { content: "\f13f"; }
+.flaticon-jacket:before { content: "\f140"; }
+.flaticon-women-coat:before { content: "\f141"; }
+.flaticon-women-long-coat:before { content: "\f142"; }
+.flaticon-commerce-1:before { content: "\f143"; }
+.flaticon-heart-1:before { content: "\f144"; }
+.flaticon-skirt:before { content: "\f145"; }
+.flaticon-favorite:before { content: "\f146"; }
+.flaticon-heart:before { content: "\f147"; }
+.flaticon-woman:before { content: "\f148"; }
+.flaticon-shopping-cart-1:before { content: "\f149"; }
+.flaticon-rupee:before { content: "\f14a"; }
+.flaticon-commerce:before { content: "\f14b"; }
+.flaticon-like:before { content: "\f14c"; }
+.flaticon-shopping-cart:before { content: "\f14d"; }
+.flaticon-hat-2:before { content: "\f14e"; }
+.flaticon-hat-1:before { content: "\f14f"; }
+.flaticon-hat:before { content: "\f150"; }
+.flaticon-body-1:before { content: "\f151"; }
+.flaticon-magnifying-glass:before { content: "\f152"; }
+.flaticon-dress:before { content: "\f153"; }

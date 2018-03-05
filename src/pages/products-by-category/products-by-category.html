@@ -1,0 +1,26 @@
+<ion-header>
+  <custom-header title="{{category.name}}"></custom-header>
+</ion-header>
+
+
+<ion-content id="prod-cat-list">
+<ion-list>
+  <ion-item class="cat-list-item" *ngFor="let product of products" text-wrap>
+    <ion-thumbnail item-left>
+      <img [src]="product.featured_src" />
+    </ion-thumbnail>
+
+    <h2> {{ product.title }} </h2>
+
+    <p>
+      <span [innerHTML]="product.price_html"></span>
+    </p>
+
+    <button ion-button round outline item-right color="danger" (click)="addToCart(product)">Add</button>
+  </ion-item>
+</ion-list>
+<ion-infinite-scroll (ionInfinite) = "loadMoreProducts($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-content>
+

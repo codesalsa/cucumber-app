@@ -1,0 +1,141 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 01/03/2018 21:42
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-arrows-1:before { content: "\f100"; }
+.flaticon-arrows:before { content: "\f101"; }
+.flaticon-arrow-chevron:before { content: "\f102"; }
+.flaticon-up-chevron:before { content: "\f103"; }
+.flaticon-scroll-arrow-to-left:before { content: "\f104"; }
+.flaticon-down-arrow:before { content: "\f105"; }
+.flaticon-down-chevron:before { content: "\f106"; }
+.flaticon-right-chevron-1:before { content: "\f107"; }
+.flaticon-right-chevron:before { content: "\f108"; }
+.flaticon-search-2:before { content: "\f109"; }
+.flaticon-search-1:before { content: "\f10a"; }
+.flaticon-magnifying-glass:before { content: "\f10b"; }
+.flaticon-search:before { content: "\f10c"; }
+.flaticon-heart-1:before { content: "\f10d"; }
+.flaticon-like-2:before { content: "\f10e"; }
+.flaticon-like-1:before { content: "\f10f"; }
+.flaticon-like:before { content: "\f110"; }
+.flaticon-heart:before { content: "\f111"; }
+.flaticon-buildings:before { content: "\f112"; }
+.flaticon-home:before { content: "\f113"; }
+.flaticon-list:before { content: "\f114"; }
+.flaticon-medical-notes-symbol-of-a-list-paper-on-a-clipboard:before { content: "\f115"; }
+.flaticon-checkout:before { content: "\f116"; }
+.flaticon-profile:before { content: "\f117"; }
+.flaticon-block:before { content: "\f118"; }
+.flaticon-logout-1:before { content: "\f119"; }
+.flaticon-logout:before { content: "\f11a"; }
+.flaticon-shopping-cart-3:before { content: "\f11b"; }
+.flaticon-online-shopping-cart:before { content: "\f11c"; }
+.flaticon-shopping-cart-2:before { content: "\f11d"; }
+.flaticon-shopping-cart-1:before { content: "\f11e"; }
+.flaticon-shopping-cart:before { content: "\f11f"; }
+.flaticon-shopping-basket:before { content: "\f120"; }
+.flaticon-shop:before { content: "\f121"; }
+.flaticon-groceries-1:before { content: "\f122"; }
+.flaticon-groceries:before { content: "\f123"; }
+.flaticon-egg:before { content: "\f124"; }
+.flaticon-eggs:before { content: "\f125"; }
+.flaticon-milk-products:before { content: "\f126"; }
+.flaticon-milk-bottle:before { content: "\f127"; }
+.flaticon-market:before { content: "\f128"; }
+.flaticon-grapes-with-leaf-and-stem:before { content: "\f129"; }
+.flaticon-harvest:before { content: "\f12a"; }
+.flaticon-grapes:before { content: "\f12b"; }
+.flaticon-vegetables-1:before { content: "\f12c"; }
+.flaticon-garlic:before { content: "\f12d"; }
+.flaticon-diet:before { content: "\f12e"; }
+.flaticon-vegetables:before { content: "\f12f"; }
+.flaticon-cheese-burger:before { content: "\f130"; }
+.flaticon-cheeseburger:before { content: "\f131"; }
+.flaticon-cookies:before { content: "\f132"; }
+    
+    $font-Flaticon-arrows-1: "\f100";
+    $font-Flaticon-arrows: "\f101";
+    $font-Flaticon-arrow-chevron: "\f102";
+    $font-Flaticon-up-chevron: "\f103";
+    $font-Flaticon-scroll-arrow-to-left: "\f104";
+    $font-Flaticon-down-arrow: "\f105";
+    $font-Flaticon-down-chevron: "\f106";
+    $font-Flaticon-right-chevron-1: "\f107";
+    $font-Flaticon-right-chevron: "\f108";
+    $font-Flaticon-search-2: "\f109";
+    $font-Flaticon-search-1: "\f10a";
+    $font-Flaticon-magnifying-glass: "\f10b";
+    $font-Flaticon-search: "\f10c";
+    $font-Flaticon-heart-1: "\f10d";
+    $font-Flaticon-like-2: "\f10e";
+    $font-Flaticon-like-1: "\f10f";
+    $font-Flaticon-like: "\f110";
+    $font-Flaticon-heart: "\f111";
+    $font-Flaticon-buildings: "\f112";
+    $font-Flaticon-home: "\f113";
+    $font-Flaticon-list: "\f114";
+    $font-Flaticon-medical-notes-symbol-of-a-list-paper-on-a-clipboard: "\f115";
+    $font-Flaticon-checkout: "\f116";
+    $font-Flaticon-profile: "\f117";
+    $font-Flaticon-block: "\f118";
+    $font-Flaticon-logout-1: "\f119";
+    $font-Flaticon-logout: "\f11a";
+    $font-Flaticon-shopping-cart-3: "\f11b";
+    $font-Flaticon-online-shopping-cart: "\f11c";
+    $font-Flaticon-shopping-cart-2: "\f11d";
+    $font-Flaticon-shopping-cart-1: "\f11e";
+    $font-Flaticon-shopping-cart: "\f11f";
+    $font-Flaticon-shopping-basket: "\f120";
+    $font-Flaticon-shop: "\f121";
+    $font-Flaticon-groceries-1: "\f122";
+    $font-Flaticon-groceries: "\f123";
+    $font-Flaticon-egg: "\f124";
+    $font-Flaticon-eggs: "\f125";
+    $font-Flaticon-milk-products: "\f126";
+    $font-Flaticon-milk-bottle: "\f127";
+    $font-Flaticon-market: "\f128";
+    $font-Flaticon-grapes-with-leaf-and-stem: "\f129";
+    $font-Flaticon-harvest: "\f12a";
+    $font-Flaticon-grapes: "\f12b";
+    $font-Flaticon-vegetables-1: "\f12c";
+    $font-Flaticon-garlic: "\f12d";
+    $font-Flaticon-diet: "\f12e";
+    $font-Flaticon-vegetables: "\f12f";
+    $font-Flaticon-cheese-burger: "\f130";
+    $font-Flaticon-cheeseburger: "\f131";
+    $font-Flaticon-cookies: "\f132";
