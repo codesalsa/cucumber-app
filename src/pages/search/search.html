@@ -8,6 +8,11 @@
   
   
   <ion-content padding>
+      <ion-list *ngIf="!products">
+        <ion-item *ngFor="let item of searchHistList">
+          {{item.searchquery}}
+        </ion-item>
+      </ion-list>
       <ion-list>
         <ion-item *ngFor="let product of products" text-wrap  (click)="openProductPage(product)">
           <ion-thumbnail item-left>

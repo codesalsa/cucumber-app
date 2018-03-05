@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import * as WC from 'woocommerce-api';
 import { WoocommerceProvider } from '../../providers/woocommerce/woocommerce';
 
@@ -13,14 +14,21 @@ export class SearchPage {
 
   searchQuery: string = "";
   WooCommerce: any;
-  products: any[] = [];
+  products: any[] = []; 
   page: number = 2;
+  searchHistList: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private WP: WoocommerceProvider, public zone: NgZone, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private WP: WoocommerceProvider, public zone: NgZone, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public storage: Storage) {
     console.log(this.navParams.get("searchQuery"));
 
-    //this.searchQuery = this.navParams.get("searchQuery");
     this.searchQuery;
+
+    this.storage.ready().then(()=>{
+      this.storage.get("searchhistory").then( (data)=>{
+        this.searchHistList = data;
+        console.log("Search query is: " + this.searchHistList);
+      });
+    });
 
     this.WooCommerce = WP.init();
   }
@@ -31,6 +39,7 @@ export class SearchPage {
 
   onSearch(){
     if(this.searchQuery.length > 0){
+      console.log(this.searchQuery);
       let loading = this.loadingCtrl.create({content : ""});
   
       loading.present();
@@ -38,6 +47,19 @@ export class SearchPage {
       this.WooCommerce.getAsync("products?filter[q]=" + this.searchQuery).then( (searchData) => {
         this.zone.run(()=>{this.products = JSON.parse(searchData.body).products});
         console.log(JSON.parse(searchData.body));
+
+        this.storage.ready().then(()=>{
+          this.storage.get("searchhistory").then((data)=>{
+            data= [];
+            data.push({
+              "searchquery": this.searchQuery
+            })
+            this.storage.set("searchhistory", data).then( ()=>{
+              console.log("search updated");
+              console.log(data);
+            })
+          })
+        });
         loading.dismissAll();
       }, (err) => {
         console.log(err);

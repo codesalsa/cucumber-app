@@ -8,7 +8,7 @@ import { CheckoutPage } from '../checkout/checkout';
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
-})
+}) 
 export class CartPage {
 
   cartItems: any[] = [];
