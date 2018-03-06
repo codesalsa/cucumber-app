@@ -22,6 +22,7 @@ export class SearchPage {
     console.log(this.navParams.get("searchQuery"));
 
     this.searchQuery;
+    this.searchHistList;
 
     this.storage.ready().then(()=>{
       this.storage.get("searchhistory").then( (data)=>{
@@ -52,11 +53,7 @@ export class SearchPage {
           this.storage.get("searchhistory").then((data)=>{
             data= [];
             data.push({
-              "searchquery": this.searchQuery
-            })
-            this.storage.set("searchhistory", data).then( ()=>{
-              console.log("search updated");
-              console.log(data);
+              "searchItem": this.searchQuery
             })
           })
         });

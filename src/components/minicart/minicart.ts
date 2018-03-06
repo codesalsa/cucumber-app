@@ -25,6 +25,7 @@ export class MinicartComponent {
 
     this.events.subscribe("updateCart", () => {
       this.updateCart();
+      console.log("EVENT DETECTED");
     });
 
   }
@@ -33,7 +34,7 @@ export class MinicartComponent {
     this.navCtrl.push(CartPage);
   }
 
-  ionViewDidLoad(){
+  ionViewDidEnter(){
     this.updateCart();
   }
 

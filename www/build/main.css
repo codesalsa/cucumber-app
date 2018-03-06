@@ -28105,6 +28105,19 @@ ion-card {
 .card-background-page ion-card {
   position: relative;
   text-align: center;
+  padding: 0;
+  margin: 0px 0 5px !important;
+  height: 150px;
+}
+
+.card-background-page ion-card:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .card-background-page .card-title {
@@ -28339,6 +28352,50 @@ page-products-by-category .item-ios ion-thumbnail ion-img, page-products-by-cate
 }
 
 page-products-by-category .item-ios .item-button {
+  width: 60px;
+  height: 28px;
+}
+
+page-search .col-wrapper {
+  padding: 10px;
+  background: #fff;
+}
+
+page-search #prod-cat-list {
+  background: #f0f0f0;
+}
+
+page-search #prod-cat-list .scroll-content {
+  padding: 0 !important;
+}
+
+page-search #prod-cat-list h2 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+page-search .amount {
+  font-size: 15px;
+}
+
+page-search .cat-list-item {
+  border-top: 1px solid #e4e4e4;
+}
+
+page-search .cat-list-item .item-inner {
+  border: 0 !important;
+}
+
+page-search .cat-list-item:first-child {
+  border-top: 0;
+}
+
+page-search .item-ios ion-thumbnail ion-img, page-search .item-ios ion-thumbnail img {
+  width: 95px;
+  height: 95px;
+}
+
+page-search .item-ios .item-button {
   width: 60px;
   height: 28px;
 }

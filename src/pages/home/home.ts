@@ -1,5 +1,5 @@
-import { Component, NgZone } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -8,6 +8,8 @@ import * as WC from 'woocommerce-api';
 import { WoocommerceProvider } from '../../providers/woocommerce/woocommerce';
 
 import { ProductDetailsPage } from '../product-details/product-details';
+
+import { ProductsByCategory } from '../products-by-category/products-by-category';
 
 
 @Component({
@@ -23,7 +25,9 @@ export class HomePage {
   sliders: any[];
   categories: any[];
 
-  constructor(public navCtrl: NavController, public zone: NgZone, public loadingCtrl: LoadingController, public http: Http, private WP: WoocommerceProvider) {
+  @ViewChild('content') navCtrl: NavController;
+
+  constructor(public navParams: NavParams, public zone: NgZone, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public http: Http, private WP: WoocommerceProvider) {
 
     this.categories = [];
 
@@ -93,6 +97,11 @@ export class HomePage {
 
   openProductPage(product){
     this.navCtrl.push(ProductDetailsPage, {"product":product});
+  }
+
+  openCategoryPage(category){
+    console.log(category);
+    this.navCtrl.setRoot(ProductsByCategory, {"category": category});
   }
 
 }

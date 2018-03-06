@@ -9,7 +9,7 @@ webpackJsonp([3],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__checkout_checkout__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__checkout_checkout__ = __webpack_require__(188);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -217,6 +217,7 @@ var LoginPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_woocommerce_woocommerce__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__product_details_product_details__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__products_by_category_products_by_category__ = __webpack_require__(164);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -232,12 +233,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navCtrl, zone, loadingCtrl, http, WP) {
+    function HomePage(navParams, zone, loadingCtrl, modalCtrl, http, WP) {
         var _this = this;
-        this.navCtrl = navCtrl;
+        this.navParams = navParams;
         this.zone = zone;
         this.loadingCtrl = loadingCtrl;
+        this.modalCtrl = modalCtrl;
         this.http = http;
         this.WP = WP;
         this.categories = [];
@@ -292,11 +295,19 @@ var HomePage = (function () {
     HomePage.prototype.openProductPage = function (product) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__product_details_product_details__["a" /* ProductDetailsPage */], { "product": product });
     };
+    HomePage.prototype.openCategoryPage = function (category) {
+        console.log(category);
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_6__products_by_category_products_by_category__["a" /* ProductsByCategory */], { "category": category });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('content'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */])
+    ], HomePage.prototype, "navCtrl", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/home/home.html"*/'<ion-header>\n    <custom-header title="Easy NOW"></custom-header>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-slides *ngIf="sliders && sliders.length" autoplay="3000" class="slideroption" pager="true"  loop="true" speed="300">\n      <ion-slide *ngFor="let slide of sliders">\n          <span *ngFor="let item of slide.attachments">\n              <img src="{{item.images.full.url}}" />\n          </span>\n      </ion-slide>\n    </ion-slides>\n  </ion-card>\n  <div *ngFor="let category of categories; let i = index" class="card-background-page">\n    <ion-card class="home-cat-item" col-12 *ngFor="let sub of category.subCategories" (click)="openCategoryPage(sub)">\n      <img src="{{sub.image}}" />\n      <div class="card-title" [innerHTML]="sub.name"></div>\n    </ion-card>\n  </div>\n  <ion-row>\n      <ion-col col-6 *ngFor="let product of moreproducts" text-wrap (click)="openProductPage(product)">\n        <ion-thumbnail item-left>\n            <img [src]="product.featured_src" />\n          </ion-thumbnail>\n          <h2 [innerHTML]="product.title.substr(0, 50) + \'...\'"></h2>\n          <p>\n            <span [innerHTML]="product.price_html"></span>\n          </p>\n      </ion-col>\n  </ion-row>\n</ion-content>\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */]])
     ], HomePage);
     return HomePage;
 }());
@@ -353,7 +364,138 @@ var ProductDetailsPage = (function () {
 
 /***/ }),
 
-/***/ 187:
+/***/ 164:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductsByCategory; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__ = __webpack_require__(46);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProductsByCategory = (function () {
+    function ProductsByCategory(navCtrl, navParams, zone, loadingCtrl, WP, storage, toastCtrl, modalCtrl) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.zone = zone;
+        this.loadingCtrl = loadingCtrl;
+        this.WP = WP;
+        this.storage = storage;
+        this.toastCtrl = toastCtrl;
+        this.modalCtrl = modalCtrl;
+        this.page = 1;
+        this.category = this.navParams.get("category");
+        var loading = this.loadingCtrl.create({ content: "" });
+        this.WooCommerce = WP.init();
+        loading.present();
+        this.WooCommerce.getAsync("products?filter[category]=" + this.category.slug).then(function (data) {
+            console.log(JSON.parse(data.body));
+            //this.products = JSON.parse(data.body).products;
+            _this.zone.run(function () { _this.products = JSON.parse(data.body).products; });
+            loading.dismissAll();
+        }, function (err) {
+            console.log(err);
+        });
+    }
+    ProductsByCategory.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProductsByCategory');
+    };
+    ProductsByCategory.prototype.loadMoreProducts = function (event) {
+        var _this = this;
+        if (event == null) {
+            this.page = 2;
+            this.products = [];
+        }
+        else {
+            this.page++;
+            console.log("Getting page " + this.page);
+            this.WooCommerce.getAsync("products?filter[category]=" + this.category.slug + "&page=" + this.page).then(function (data) {
+                var parseData = (JSON.parse(data.body).products);
+                _this.zone.run(function () { _this.products = _this.products.concat(JSON.parse(data.body).products); });
+                console.log(_this.products);
+                if (event != null) {
+                    event.complete();
+                }
+                if (parseData.length < 10) {
+                    event.enable(false);
+                    _this.toastCtrl.create({
+                        message: "End of products!",
+                        duration: 5000
+                    }).present();
+                }
+            }, function (err) {
+                console.log(err);
+            });
+        }
+    };
+    ProductsByCategory.prototype.addToCart = function (product) {
+        var _this = this;
+        this.storage.get("cart").then(function (data) {
+            if (data == null || data.length == 0) {
+                data = [];
+                data.push({
+                    "product": product,
+                    "qty": 1,
+                    "amount": parseFloat(product.price)
+                });
+            }
+            else {
+                var added = 0;
+                for (var i = 0; i < data.length; i++) {
+                    if (product.id == data[i].product.id) {
+                        console.log("Product is already in cart");
+                        var qty = data[i].qty;
+                        data[i].qty = qty + 1;
+                        data[i].amount = parseFloat(data[i].amount) + parseFloat(data[i].product.price);
+                        added = 1;
+                    }
+                }
+                if (added == 0) {
+                    data.push({
+                        "product": product,
+                        "qty": 1,
+                        "amount": parseFloat(product.price)
+                    });
+                }
+            }
+            _this.storage.set("cart", data).then(function () {
+                console.log("cart updated");
+                console.log(data);
+                _this.toastCtrl.create({
+                    message: "Product added to Cart",
+                    duration: 3000
+                }).present();
+            });
+        });
+    };
+    ProductsByCategory = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-products-by-category',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/products-by-category/products-by-category.html"*/'<ion-header>\n  <custom-header title="{{category.name}}"></custom-header>\n</ion-header>\n\n\n<ion-content id="prod-cat-list">\n<ion-list>\n  <ion-item class="cat-list-item" *ngFor="let product of products" text-wrap>\n    <ion-thumbnail item-left>\n      <img [src]="product.featured_src" />\n    </ion-thumbnail>\n\n    <h2> {{ product.title }} </h2>\n\n    <p>\n      <span [innerHTML]="product.price_html"></span>\n    </p>\n\n    <button ion-button round outline item-right color="danger" (click)="addToCart(product)">Add</button>\n  </ion-item>\n</ion-list>\n<ion-infinite-scroll (ionInfinite) = "loadMoreProducts($event)">\n  <ion-infinite-scroll-content></ion-infinite-scroll-content>\n</ion-infinite-scroll>\n</ion-content>\n\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/products-by-category/products-by-category.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
+    ], ProductsByCategory);
+    return ProductsByCategory;
+}());
+
+//# sourceMappingURL=products-by-category.js.map
+
+/***/ }),
+
+/***/ 188:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -503,7 +645,7 @@ var CheckoutPage = (function () {
 
 /***/ }),
 
-/***/ 188:
+/***/ 189:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -513,11 +655,11 @@ var CheckoutPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_woocommerce_woocommerce__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__signup_signup__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__signup_signup__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__cart_cart__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__orders_orders__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__products_by_category_products_by_category__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__orders_orders__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__products_by_category_products_by_category__ = __webpack_require__(164);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -649,7 +791,7 @@ var MenuPage = (function () {
 
 /***/ }),
 
-/***/ 198:
+/***/ 199:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -662,11 +804,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 198;
+webpackEmptyAsyncContext.id = 199;
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -694,12 +836,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 240;
+webpackAsyncContext.id = 241;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 307:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -857,7 +999,7 @@ var SignupPage = (function () {
 
 /***/ }),
 
-/***/ 308:
+/***/ 309:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -934,137 +1076,6 @@ var OrdersPage = (function () {
 
 /***/ }),
 
-/***/ 309:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductsByCategory; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__ = __webpack_require__(46);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var ProductsByCategory = (function () {
-    function ProductsByCategory(navCtrl, navParams, zone, loadingCtrl, WP, storage, toastCtrl, modalCtrl) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.zone = zone;
-        this.loadingCtrl = loadingCtrl;
-        this.WP = WP;
-        this.storage = storage;
-        this.toastCtrl = toastCtrl;
-        this.modalCtrl = modalCtrl;
-        this.page = 1;
-        this.category = this.navParams.get("category");
-        var loading = this.loadingCtrl.create({ content: "" });
-        this.WooCommerce = WP.init();
-        loading.present();
-        this.WooCommerce.getAsync("products?filter[category]=" + this.category.slug).then(function (data) {
-            console.log(JSON.parse(data.body));
-            //this.products = JSON.parse(data.body).products;
-            _this.zone.run(function () { _this.products = JSON.parse(data.body).products; });
-            loading.dismissAll();
-        }, function (err) {
-            console.log(err);
-        });
-    }
-    ProductsByCategory.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ProductsByCategory');
-    };
-    ProductsByCategory.prototype.loadMoreProducts = function (event) {
-        var _this = this;
-        if (event == null) {
-            this.page = 2;
-            this.products = [];
-        }
-        else {
-            this.page++;
-            console.log("Getting page " + this.page);
-            this.WooCommerce.getAsync("products?filter[category]=" + this.category.slug + "&page=" + this.page).then(function (data) {
-                var parseData = (JSON.parse(data.body).products);
-                _this.zone.run(function () { _this.products = _this.products.concat(JSON.parse(data.body).products); });
-                console.log(_this.products);
-                if (event != null) {
-                    event.complete();
-                }
-                if (parseData.length < 10) {
-                    event.enable(false);
-                    _this.toastCtrl.create({
-                        message: "End of products!",
-                        duration: 5000
-                    }).present();
-                }
-            }, function (err) {
-                console.log(err);
-            });
-        }
-    };
-    ProductsByCategory.prototype.addToCart = function (product) {
-        var _this = this;
-        this.storage.get("cart").then(function (data) {
-            if (data == null || data.length == 0) {
-                data = [];
-                data.push({
-                    "product": product,
-                    "qty": 1,
-                    "amount": parseFloat(product.price)
-                });
-            }
-            else {
-                var added = 0;
-                for (var i = 0; i < data.length; i++) {
-                    if (product.id == data[i].product.id) {
-                        console.log("Product is already in cart");
-                        var qty = data[i].qty;
-                        data[i].qty = qty + 1;
-                        data[i].amount = parseFloat(data[i].amount) + parseFloat(data[i].product.price);
-                        added = 1;
-                    }
-                }
-                if (added == 0) {
-                    data.push({
-                        "product": product,
-                        "qty": 1,
-                        "amount": parseFloat(product.price)
-                    });
-                }
-            }
-            _this.storage.set("cart", data).then(function () {
-                console.log("cart updated");
-                console.log(data);
-                _this.toastCtrl.create({
-                    message: "Product added to Cart",
-                    duration: 3000
-                }).present();
-            });
-        });
-    };
-    ProductsByCategory = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-products-by-category',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/products-by-category/products-by-category.html"*/'<ion-header>\n  <custom-header title="{{category.name}}"></custom-header>\n</ion-header>\n\n\n<ion-content id="prod-cat-list">\n<ion-list>\n  <ion-item class="cat-list-item" *ngFor="let product of products" text-wrap>\n    <ion-thumbnail item-left>\n      <img [src]="product.featured_src" />\n    </ion-thumbnail>\n\n    <h2> {{ product.title }} </h2>\n\n    <p>\n      <span [innerHTML]="product.price_html"></span>\n    </p>\n\n    <button ion-button round outline item-right color="danger" (click)="addToCart(product)">Add</button>\n  </ion-item>\n</ion-list>\n<ion-infinite-scroll (ionInfinite) = "loadMoreProducts($event)">\n  <ion-infinite-scroll-content></ion-infinite-scroll-content>\n</ion-infinite-scroll>\n</ion-content>\n\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/products-by-category/products-by-category.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
-    ], ProductsByCategory);
-    return ProductsByCategory;
-}());
-
-//# sourceMappingURL=products-by-category.js.map
-
-/***/ }),
-
 /***/ 351:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1105,6 +1116,7 @@ var SearchPage = (function () {
         this.searchHistList = [];
         console.log(this.navParams.get("searchQuery"));
         this.searchQuery;
+        this.searchHistList;
         this.storage.ready().then(function () {
             _this.storage.get("searchhistory").then(function (data) {
                 _this.searchHistList = data;
@@ -1129,11 +1141,7 @@ var SearchPage = (function () {
                     _this.storage.get("searchhistory").then(function (data) {
                         data = [];
                         data.push({
-                            "searchquery": _this.searchQuery
-                        });
-                        _this.storage.set("searchhistory", data).then(function () {
-                            console.log("search updated");
-                            console.log(data);
+                            "searchItem": _this.searchQuery
                         });
                     });
                 });
@@ -1166,7 +1174,7 @@ var SearchPage = (function () {
     };
     SearchPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-search',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/search/search.html"*/'<ion-header>\n    <custom-header title="Search"></custom-header>\n    <ion-toolbar color="danger">\n        <ion-searchbar [(ngModel)] = "searchQuery" (search)="onSearch()" placeholder="What are you looking for"></ion-searchbar>\n    </ion-toolbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n      <ion-list *ngIf="!products">\n        <ion-item *ngFor="let item of searchHistList">\n          {{item.searchquery}}\n        </ion-item>\n      </ion-list>\n      <ion-list>\n        <ion-item *ngFor="let product of products" text-wrap  (click)="openProductPage(product)">\n          <ion-thumbnail item-left>\n            <img [src]="product.featured_src" />\n          </ion-thumbnail>\n    \n          <h2> {{ product.title }} </h2>\n    \n          <p>\n            <span [innerHTML]="product.short_description.substr(0, 50) + \'...\'"></span>\n            <span [innerHTML]="product.price_html"></span>\n            <span *ngIf="product.average_rating >= 1">\n              <ion-icon style="color: #d4af37" small name="star"></ion-icon>\n            </span>\n            <span *ngIf="product.average_rating >= 2">\n              <ion-icon style="color: #d4af37" small name="star"></ion-icon>\n            </span>\n            <span *ngIf="product.average_rating >= 3">\n              <ion-icon style="color: #d4af37" small name="star"></ion-icon>\n            </span>\n            <span *ngIf="product.average_rating >= 4">\n              <ion-icon style="color: #d4af37" small name="star"></ion-icon>\n            </span>\n            <span *ngIf="product.average_rating >= 5">\n              <ion-icon style="color: #d4af37" small name="star"></ion-icon>\n            </span>\n          </p>\n    \n          <button ion-button icon clear item-right>\n            <ion-icon name="arrow-forward"></ion-icon>\n          </button>\n        </ion-item>\n      </ion-list>\n  \n      <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n      </ion-infinite-scroll>\n  \n  </ion-content>\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/search/search.html"*/,
+            selector: 'page-search',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/search/search.html"*/'<ion-header>\n    <custom-header title="Search"></custom-header>\n    <ion-toolbar color="danger">\n        <ion-searchbar [(ngModel)] = "searchQuery" (search)="onSearch()" placeholder="What are you looking for"></ion-searchbar>\n    </ion-toolbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding  id="prod-cat-list">\n      <ion-list *ngIf="!products">\n        <ion-item *ngFor="let item of searchHistList">\n          {{item}}\n        </ion-item>\n      </ion-list>\n      <ion-list>\n        <ion-item class="cat-list-item" *ngFor="let product of products" text-wrap>\n          <ion-thumbnail item-left>\n            <img [src]="product.featured_src" />\n          </ion-thumbnail>\n      \n          <h2> {{ product.title }} </h2>\n      \n          <p>\n            <span [innerHTML]="product.price_html"></span>\n          </p>\n      \n          <button ion-button round outline item-right color="danger" (click)="addToCart(product)">Add</button>\n        </ion-item>\n      </ion-list>\n  \n      <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n      </ion-infinite-scroll>\n  \n  </ion-content>\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/search/search.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], SearchPage);
@@ -1206,15 +1214,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_minicart_minicart__ = __webpack_require__(643);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(644);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_menu_menu__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_products_by_category_products_by_category__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_menu_menu__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_products_by_category_products_by_category__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_product_details_product_details__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_cart_cart__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_signup_signup__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_signup_signup__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_checkout_checkout__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_checkout_checkout__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_search_search__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_orders_orders__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_orders_orders__ = __webpack_require__(309);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_status_bar__ = __webpack_require__(352);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_splash_screen__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_woocommerce_woocommerce__ = __webpack_require__(46);
@@ -1467,13 +1475,14 @@ var MinicartComponent = (function () {
             });
         });
         this.events.subscribe("updateCart", function () {
-            _this.updateCart();
+            //this.updateCart();
+            console.log("EVENT DETECTED");
         });
     }
     MinicartComponent.prototype.openCart = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_cart_cart__["a" /* CartPage */]);
     };
-    MinicartComponent.prototype.ionViewDidLoad = function () {
+    MinicartComponent.prototype.ionViewDidEnter = function () {
         this.updateCart();
     };
     MinicartComponent.prototype.updateCart = function () {
@@ -1495,10 +1504,9 @@ var MinicartComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'minicart',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/components/minicart/minicart.html"*/'<button ion-button icon-only clear color="light" (click)="openCart()">\n  <span class="flaticon flaticon-online-shopping-cart"></span>\n  {{cart_count}}\n</button>'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/components/minicart/minicart.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */]])
     ], MinicartComponent);
     return MinicartComponent;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=minicart.js.map
@@ -1515,7 +1523,7 @@ var MinicartComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(352);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__ = __webpack_require__(349);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_menu_menu__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_menu_menu__ = __webpack_require__(189);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

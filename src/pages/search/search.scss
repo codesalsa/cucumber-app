@@ -1,3 +1,27 @@
 page-search {
+    .col-wrapper{padding:10px;background:#fff;}
+    #prod-cat-list{
+        background:#f0f0f0;
+        
+        .scroll-content{padding:0 !important;}
+    }
+    #prod-cat-list h2{font-size:15px;margin:0 0 10px;}
+    .amount{font-size:15px;}
+    .cat-list-item{
+        border-top:1px solid #e4e4e4;
 
+        .item-inner{border:0 !important;}
+    }
+    .cat-list-item:first-child{
+        border-top:0;
+    }
+
+    .item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img{
+        width:95px;
+        height:95px;
+    }
+    .item-ios .item-button{
+        width:60px;
+        height:28px;
+    }
 }
