@@ -25,13 +25,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var CartPage = (function () {
-    function CartPage(navCtrl, navParams, storage, toastController, viewCtrl) {
+    function CartPage(navCtrl, navParams, storage, toastController, viewCtrl, events) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
         this.toastController = toastController;
         this.viewCtrl = viewCtrl;
+        this.events = events;
         this.cartItems = [];
         this.showEmptyCartMessage = false;
         this.total = 0.0;
@@ -39,9 +40,14 @@ var CartPage = (function () {
             _this.storage.get("cart").then(function (data) {
                 _this.cartItems = data;
                 console.log(_this.cartItems);
-                if (_this.cartItems.length > 0) {
+                if (_this.cartItems && _this.cartItems.length > 0) {
                     _this.cartItems.forEach(function (item, index) {
-                        _this.total = _this.total + (item.product.price * item.qty);
+                        if (!item.variation) {
+                            _this.total = _this.total + (item.product.price * item.qty);
+                        }
+                        else {
+                            _this.total = _this.total + (parseFloat(item.variation.price) * item.qty);
+                        }
                     });
                 }
                 else {
@@ -55,7 +61,13 @@ var CartPage = (function () {
     };
     CartPage.prototype.removeFromCart = function (item, i) {
         var _this = this;
-        var price = item.product.price;
+        var price;
+        if (!item.variation) {
+            price = item.product.price;
+        }
+        else {
+            price = parseFloat(item.variation.price);
+        }
         var qty = item.qty;
         this.cartItems.splice(i, 1);
         this.storage.set("cart", this.cartItems).then(function () {
@@ -64,6 +76,7 @@ var CartPage = (function () {
         if (this.cartItems.length == 0) {
             this.showEmptyCartMessage = true;
         }
+        this.events.publish("updateCart");
     };
     CartPage.prototype.closeModal = function () {
         this.viewCtrl.dismiss();
@@ -79,12 +92,16 @@ var CartPage = (function () {
             }
         });
     };
-    CartPage.prototype.changeQty = function (item, i, change) {
+    CartPage.prototype.changeQty = function (item, index, change) {
         var _this = this;
-        var price = 0;
-        var qty = 0;
-        price = parseFloat(item.product.price);
-        qty = item.qty;
+        var price;
+        if (!item.variation) {
+            price = item.product.price;
+        }
+        else {
+            price = parseFloat(item.variation.price);
+        }
+        var qty = item.qty;
         if (change < 0 && item.qty == 1) {
             return;
         }
@@ -92,7 +109,7 @@ var CartPage = (function () {
         item.qty = qty;
         item.amount = qty * price;
         item.price = price;
-        this.cartItems[i] = item;
+        this.cartItems[index] = item;
         this.storage.set("cart", this.cartItems).then(function () {
             if (change > 0) {
                 _this.total = _this.total + item.price;
@@ -105,12 +122,13 @@ var CartPage = (function () {
                 duration: 2000,
             }).present();
         });
+        this.total = (parseFloat(this.total.toString()) + (parseFloat(price.toString()) * change));
     };
     CartPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-cart',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/cart/cart.html"*/'<ion-header>\n  <ion-navbar color="danger">\n    <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Your Cart</ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only color="light" (click)="onSearch()">\n        <span class="flaticon flaticon-magnifying-glass"></span>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n\n    <ion-card>\n        <ion-grid>\n          <ion-row [hidden]="!showEmptyCartMessage">\n            <ion-col class="empty-cart-cont">\n              <div class="empty-cart-icon">\n                <span class="flaticon flaticon-shopping-cart-1"></span>\n              </div>\n              <p>There are no items in your cart.<br />Enjoy great shopping experience with us!</p>\n              <button ion-button color="danger" (click)="closeModal()">Continue Shopping</button>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n    </ion-card>\n\n    <ion-list id="prod-cart-list">\n      <ion-item class="cart-list-item" *ngFor="let item of cartItems; let i = index" text-wrap>\n        <ion-thumbnail item-left>\n          <img [src]="item.product.featured_src" />\n        </ion-thumbnail>\n    \n        <h2> {{ item.product.title }} </h2>\n        <ion-row no-padding>\n          <ion-col col-3>\n            <p class="cart-item-price">\n                <span [innerHTML]="item.product.price_html"></span>\n            </p>\n          </ion-col>\n          <ion-col col-6>\n            <button class="qty-btn" ion-button icon-only clear (click)="changeQty(item, i, -1)">\n              <ion-icon name="ios-remove-circle-outline"></ion-icon>\n            </button>\n            <button class="qty-txt" ion-button clear>\n              {{ item.qty }}\n            </button>\n            <button class="qty-btn" ion-button icon-only clear (click)="changeQty(item, i, 1)">\n              <ion-icon name="ios-add-circle-outline"></ion-icon>\n            </button>\n          </ion-col>\n          <ion-col col-3>\n              <button class="cart-remove-btn" ion-button item-right clear color="danger" (click)="removeFromCart(item, i)">\n                  <ion-icon name="ios-trash-outline"></ion-icon>\n              </button>\n          </ion-col>\n        </ion-row>\n      </ion-item>\n    </ion-list>\n\n</ion-content>\n\n<ion-footer [hidden]="showEmptyCartMessage">\n    <ion-toolbar color="orange">\n      <div class="total-cont">\n        <h3>{{cartItems.length}} Items</h3>\n        <h2>INR {{ total }}</h2>\n      </div>\n      <div class="checkout-btn-cont">\n          <button ion-button color="light" clear (click)="checkout()">\n            Checkout\n            <span class="flaticon flaticon-right-chevron-1"></span>\n          </button>\n      </div>\n    </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/cart/cart.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */]])
     ], CartPage);
     return CartPage;
 }());
@@ -305,7 +323,7 @@ var HomePage = (function () {
     ], HomePage.prototype, "navCtrl", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/home/home.html"*/'<ion-header>\n    <custom-header title="Easy NOW"></custom-header>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-slides *ngIf="sliders && sliders.length" autoplay="3000" class="slideroption" pager="true"  loop="true" speed="300">\n      <ion-slide *ngFor="let slide of sliders">\n          <span *ngFor="let item of slide.attachments">\n              <img src="{{item.images.full.url}}" />\n          </span>\n      </ion-slide>\n    </ion-slides>\n  </ion-card>\n  <div *ngFor="let category of categories; let i = index" class="card-background-page">\n    <ion-card class="home-cat-item" col-12 *ngFor="let sub of category.subCategories" (click)="openCategoryPage(sub)">\n      <img src="{{sub.image}}" />\n      <div class="card-title" [innerHTML]="sub.name"></div>\n    </ion-card>\n  </div>\n  <ion-row>\n      <ion-col col-6 *ngFor="let product of moreproducts" text-wrap (click)="openProductPage(product)">\n        <ion-thumbnail item-left>\n            <img [src]="product.featured_src" />\n          </ion-thumbnail>\n          <h2 [innerHTML]="product.title.substr(0, 50) + \'...\'"></h2>\n          <p>\n            <span [innerHTML]="product.price_html"></span>\n          </p>\n      </ion-col>\n  </ion-row>\n</ion-content>\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/home/home.html"*/'<ion-header>\n    <custom-header title="Easy NOW"></custom-header>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-slides *ngIf="sliders && sliders.length" autoplay="3000" class="slideroption" pager="true"  loop="true" speed="300">\n      <ion-slide *ngFor="let slide of sliders">\n          <span *ngFor="let item of slide.attachments">\n              <img src="{{item.images.full.url}}" />\n          </span>\n      </ion-slide>\n    </ion-slides>\n  </ion-card>\n  <div *ngFor="let category of categories; let i = index" class="card-background-page">\n    <ion-card class="home-cat-item" col-12 *ngFor="let sub of category.subCategories" (click)="openCategoryPage(sub)">\n      <img src="{{sub.image}}" />\n      <div class="card-title" [innerHTML]="sub.name"></div>\n    </ion-card>\n  </div>\n  <div id="prod-cat-list">\n    <ion-list>\n      <ion-item class="cat-list-item" *ngFor="let product of moreproducts" text-wrap>\n        <ion-thumbnail item-left>\n          <img [src]="product.featured_src" />\n        </ion-thumbnail>\n    \n        <h2> {{ product.title }} </h2>\n    \n        <p>\n          <span [innerHTML]="product.price_html"></span>\n        </p>\n    \n        <button ion-button round outline item-right color="danger" (click)="addToCart(product)">Add</button>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */]])
     ], HomePage);
@@ -387,7 +405,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ProductsByCategory = (function () {
-    function ProductsByCategory(navCtrl, navParams, zone, loadingCtrl, WP, storage, toastCtrl, modalCtrl) {
+    function ProductsByCategory(navCtrl, navParams, zone, loadingCtrl, WP, storage, toastCtrl, modalCtrl, events) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -397,6 +415,7 @@ var ProductsByCategory = (function () {
         this.storage = storage;
         this.toastCtrl = toastCtrl;
         this.modalCtrl = modalCtrl;
+        this.events = events;
         this.page = 1;
         this.category = this.navParams.get("category");
         var loading = this.loadingCtrl.create({ content: "" });
@@ -445,7 +464,7 @@ var ProductsByCategory = (function () {
     ProductsByCategory.prototype.addToCart = function (product) {
         var _this = this;
         this.storage.get("cart").then(function (data) {
-            if (data == null || data.length == 0) {
+            if (data == undefined || data.length == 0) {
                 data = [];
                 data.push({
                     "product": product,
@@ -475,6 +494,7 @@ var ProductsByCategory = (function () {
             _this.storage.set("cart", data).then(function () {
                 console.log("cart updated");
                 console.log(data);
+                _this.events.publish("updateCart");
                 _this.toastCtrl.create({
                     message: "Product added to Cart",
                     duration: 3000
@@ -486,7 +506,7 @@ var ProductsByCategory = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-products-by-category',template:/*ion-inline-start:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/products-by-category/products-by-category.html"*/'<ion-header>\n  <custom-header title="{{category.name}}"></custom-header>\n</ion-header>\n\n\n<ion-content id="prod-cat-list">\n<ion-list>\n  <ion-item class="cat-list-item" *ngFor="let product of products" text-wrap>\n    <ion-thumbnail item-left>\n      <img [src]="product.featured_src" />\n    </ion-thumbnail>\n\n    <h2> {{ product.title }} </h2>\n\n    <p>\n      <span [innerHTML]="product.price_html"></span>\n    </p>\n\n    <button ion-button round outline item-right color="danger" (click)="addToCart(product)">Add</button>\n  </ion-item>\n</ion-list>\n<ion-infinite-scroll (ionInfinite) = "loadMoreProducts($event)">\n  <ion-infinite-scroll-content></ion-infinite-scroll-content>\n</ion-infinite-scroll>\n</ion-content>\n\n'/*ion-inline-end:"/Users/asktusar/Desktop/IONIC V3/cucumber-app/src/pages/products-by-category/products-by-category.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_woocommerce_woocommerce__["a" /* WoocommerceProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */]])
     ], ProductsByCategory);
     return ProductsByCategory;
 }());
@@ -1475,7 +1495,7 @@ var MinicartComponent = (function () {
             });
         });
         this.events.subscribe("updateCart", function () {
-            //this.updateCart();
+            _this.updateCart();
             console.log("EVENT DETECTED");
         });
     }

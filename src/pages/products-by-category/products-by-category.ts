@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, ModalController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { CartPage } from '../cart/cart';
@@ -22,7 +22,7 @@ export class ProductsByCategory {
   page: number;
   category: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public zone: NgZone, public loadingCtrl: LoadingController,  private WP: WoocommerceProvider, public storage: Storage, public toastCtrl: ToastController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public zone: NgZone, public loadingCtrl: LoadingController,  private WP: WoocommerceProvider, public storage: Storage, public toastCtrl: ToastController, public modalCtrl: ModalController, public events: Events) {
 
     this.page = 1;
     this.category = this.navParams.get("category");
@@ -77,9 +77,11 @@ export class ProductsByCategory {
   }
 
   addToCart(product){
+
     this.storage.get("cart").then((data)=>{
-      if(data == null || data.length == 0){
+      if(data == undefined || data.length == 0){
         data= [];
+
         data.push({
           "product": product,
           "qty": 1,
@@ -110,6 +112,8 @@ export class ProductsByCategory {
       this.storage.set("cart", data).then( ()=>{
         console.log("cart updated");
         console.log(data);
+
+        this.events.publish("updateCart");
 
         this.toastCtrl.create({
           message: "Product added to Cart",

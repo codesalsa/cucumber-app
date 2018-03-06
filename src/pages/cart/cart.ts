@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, ViewController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
@@ -15,17 +15,22 @@ export class CartPage {
   total: any;
   showEmptyCartMessage: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public toastController: ToastController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public toastController: ToastController, public viewCtrl: ViewController, public events: Events) {
     this.total = 0.0;
     this.storage.ready().then(()=>{
       this.storage.get("cart").then( (data)=>{
         this.cartItems = data;
         console.log(this.cartItems);
 
-        if(this.cartItems.length > 0){
+        if(this.cartItems && this.cartItems.length > 0){
 
           this.cartItems.forEach( (item, index)=> {
-            this.total = this.total + (item.product.price * item.qty)
+            if(!item.variation){
+              this.total = this.total + (item.product.price * item.qty);
+            } else{
+              this.total = this.total + (parseFloat(item.variation.price) * item.qty)
+            }
+            
           })
 
         } else {
@@ -43,7 +48,13 @@ export class CartPage {
 
   removeFromCart(item, i){
 
-    let price = item.product.price;
+    let price;
+
+    if(!item.variation){
+      price = item.product.price;
+    } else{
+      price = parseFloat(item.variation.price);
+    }
     let qty = item.qty;
 
     this.cartItems.splice(i, 1);
@@ -57,6 +68,8 @@ export class CartPage {
     if(this.cartItems.length == 0){
       this.showEmptyCartMessage = true;
     }
+
+    this.events.publish("updateCart");
 
 
   }
@@ -77,23 +90,29 @@ export class CartPage {
 
   }
 
-  changeQty(item, i, change){
-    let price = 0;
-    let qty = 0;
+  changeQty(item: any, index: number, change:number){
 
-    price = parseFloat(item.product.price);
-    qty = item.qty;
+    let price;
 
-    if(change < 0 && item.qty ==1){
+    if(!item.variation){
+      price = item.product.price;
+    } else{
+      price = parseFloat(item.variation.price);
+    }
+
+    let qty:number = item.qty;
+
+    if(change < 0 && item.qty == 1){
       return;
     }
 
     qty = qty + change;
 
     item.qty = qty;
-    item.amount = qty * price;item.price = price;
+    item.amount = qty * price;
+    item.price = price;
 
-    this.cartItems[i] = item;
+    this.cartItems[index] = item;
 
     this.storage.set("cart", this.cartItems).then( ()=> {
       if(change > 0){
@@ -106,7 +125,9 @@ export class CartPage {
         message: "Cart Updated.",
         duration: 2000,
       }).present();
-    })
+    });
+
+    this.total = (parseFloat(this.total.toString()) + (parseFloat(price.toString()) * change));
   }
 
 }
